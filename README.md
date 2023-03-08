@@ -1,6 +1,6 @@
 # GiT-reminds-commands
 #### Note
-I use my own knowledge and the internet to describe the commands I use as my reminder.
+I use my own knowledge and experience to describe the commands I use as my reminder.
 
 - `git revert` **creates** a new commit that undoes the changes made by a previous commit, *without* actually removing the commit from my repository's history (unlike `git reset` which rewrites repository's history and requires to use `-f` on push). First switch to the branch I'd like to undo a commit, revert, and push.
 - `git reset` moves HEAD pointer to a different commit AKA undoing the commit that I want to remove. 
@@ -36,5 +36,10 @@ I use my own knowledge and the internet to describe the commands I use as my rem
   - *Untracked files* are the recently created files which are not yet staged (*git add*-ed).
 - `git checkout`
 - `git branch`
+- `git switch`
 - `git merge`
+- `git merge`
+
+
+
 
