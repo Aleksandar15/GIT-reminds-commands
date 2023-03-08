@@ -1,6 +1,6 @@
 # GiT-reminds-commands
 #### Note
-I use my own knowledge and experience to describe the commands I use as my reminder.
+##### I use my own knowledge and experience to describe the commands I use as my reminder.
 
 - `git revert` **creates** a new commit that undoes the changes made by a previous commit, *without* actually removing the commit from my repository's history (unlike `git reset` which rewrites repository's history and requires to use `-f` on push). First switch to the branch I'd like to undo a commit, revert, and push.
 - `git reset` moves HEAD pointer to a different commit AKA undoing the commit that I want to remove. 
@@ -34,12 +34,26 @@ I use my own knowledge and experience to describe the commands I use as my remin
 - `git restore --staged` unstages the changes that were staged into the *staging area* (huh). Humanly: cleans the *git status* from '*changes to be committed*'
 - `git status` shows the current status of the Git *repository* of the checked out (current) branch: the changes made in the *working directory* against the last commit & whether they are staged for the next commit or not.
   - *Untracked files* are the recently created files which are not yet staged (*git add*-ed).
-- `git checkout`
-- `git branch`
-- `git switch`
-- `git merge`
-- `git merge`
-
+- `git branch` to create, list, rename, and delete branches. The default command without flags will show a list of all branches in the repository; the branch prefixed with an asterisk sign (\*) is the current branch I am in.
+  - `-a` flag would show the *remote* branches as well.
+  - `-m` flag is used to rename the *current* branch.
+  - `-d` flag deletes a branch *other* than the branch I'm currently at -> *note:* to delete the current branch, a workaround is to first switch to a different branch.
+  - `git branch new-feature` the branch named *new-feature* will be created and will point to the same commit as the current branch -> *note* this command *won't* switch to the new branch automatically.
+- `git switch` is used to *switch* or *check out* at a specific branch. Introduced in same version as *git restore* v2.23.
+  - If I have *uncommitted changes* in my *working directory*, I won't be able to use *git switch* to switch branches; in that case I would need to *commit* my changes or to *stash* them before switching to a different branch.
+  - *git switch* needs to be provided with the correct branch name as it won't create a new one if it doesn't exist.
+  - If there are conflicts between my current branch and the branch I'm trying to switch onto, an error will be thrown and I'd have to resolve that first.
+  - *Only* works with branches and can't use it for switching commits like *git checkout* but a better alternative is the *git restore --source* flag.
+ - `git checkout` *switches* to the specified branch and *updates* the *working directory* to *match* the *contents* of *that* branch. It is an older command in Git that can be used to *switch* between branches or to *check out* specific commits; its functionality is split into *git restore* && *git switch*.
+   - `-b` flag creates a new branch with the specified name, pointing to the current commit, and switches to the new branch; while capital "b" a `-B` flag would overwrite a branch even if it exists and already has contents in it; to create a branch without switching to it automatically use *git branch new-feature*
+- `git merge` merges the specified branch into the current branch. It can lead to merge conflicts that would need to be solved manually; here is a YouTube video by freeCodeCamp that shows <a href="https://youtu.be/RGOj5yH7evk?t=2950">how to solve merging conflict</a> at 49:00 into the video.
+---
+*Below are the Git commands that I haven't yet needed to apply them in my projects*:
+- `git cherry-pick` git cherry-pick command followed by the *commit hash* of the commit I want to apply it to; useful when I'd want to apply a bug fix (*hotfix* is the term) or a new feature from one branch to another *without* merging the entire branch.
+  - "Cherry picking" is the act of selecting a specific commit from one branch and applying it to another branch.
+  - It can be used even for fixing a *typo*; for ex.: if I have 2 branches "*main*" and "*dev"* branch, if there is a *typo* in the "*main*" branch that has already been fixed in the "*dev*" branch I can use *git cherry-pick* command to *apply* the *typo fix* commit from the "*dev*" branch into the "*main*" branch; altough this is a small change so it most likely will be just fixed in the current branch.
+- `git stash` will *save* my *changes* and *revert* my *working directory* to the *last commit* -> later, when I'd be ready to continue working on my feature, I can *apply* the *stash* using the `git stash apply` command. This will *restore* my *saved changes* into my *working directory*.
+  - "Stashing" is the act of *temporarily saving changes* that I've made to my *working directory* without committing them.
 
 
 
