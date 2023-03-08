@@ -34,6 +34,14 @@
 - `git restore --staged` unstages the changes that were staged into the *staging area* (huh). Humanly: cleans the *git status* from '*changes to be committed*'
 - `git status` shows the current status of the Git *repository* of the checked out (current) branch: the changes made in the *working directory* against the last commit & whether they are staged for the next commit or not.
   - *Untracked files* are the recently created files which are not yet staged (*git add*-ed).
+  - `-s` flag is short for "short" provide a shorter & more concise summary of the *changes* in my *working directory*; Git shows 3 columns:
+    - The first column indicates the status of the file in the *staging area* (whether the file is new, modified, deleted, renamed, or copied).
+      - A green *M* letter means a file is modified and staged into the *staging area*. 
+    - The second column indicates the status of the file in the *working directory* (whether the file is new, modified, deleted, renamed, or copied).
+      - A red *M* letter means a file is modified but is only in the *working directory* & not *staging area*.
+      - Double question marks *??* means file is recently created & is *untracked* in the *staging area*
+    - The third column indicates the name of the file.
+
 - `git branch` to create, list, rename, and delete branches. The default command without flags will show a list of all branches in the repository; the branch prefixed with an asterisk sign (\*) is the current branch I am in.
   - `-a` flag would show the *remote* branches as well.
   - `-m` flag is used to rename the *current* branch.
@@ -47,6 +55,8 @@
  - `git checkout` *switches* to the specified branch and *updates* the *working directory* to *match* the *contents* of *that* branch. It is an older command in Git that can be used to *switch* between branches or to *check out* specific commits; its functionality is split into *git restore* && *git switch*.
    - `-b` flag creates a new branch with the specified name, pointing to the current commit, and switches to the new branch; while capital "b" a `-B` flag would overwrite a branch even if it exists and already has contents in it; to create a branch without switching to it automatically use *git branch new-feature*
 - `git merge` merges the specified branch into the current branch. It can lead to merge conflicts that would need to be solved manually; here is a YouTube video by freeCodeCamp that shows <a href="https://youtu.be/RGOj5yH7evk?t=2950">how to solve merging conflict</a> at 49:00 into the video.
+- - `git diff` is used to *show differences* between two versions of a file, or between two branches or commits in a Git repository; it means I can use *commit hash* or *HEAD*s
+  - `--staged` flag shows the differences between the *staging area* and the most recent commit (even if they were *modified* or *added* or *deleted*).
 ---
 *Below are the Git commands that I haven't yet needed to apply them in my projects*:
 - `git cherry-pick` git cherry-pick command followed by the *commit hash* of the commit I want to apply it to; useful when I'd want to apply a bug fix (*hotfix* is the term) or a new feature from one branch to another *without* merging the entire branch.
@@ -57,8 +67,6 @@
   - Git saves my changes in a *hidden stash entry*, which is stored in the Git repository. The *stash entry* itself is a *commit object* that contains the changes I've made to my *working directory*, but it is not stored in any branch or commit history. Instead, it is kept separate from the *current branch*, allowing me to *temporarily set aside changes* and I can switch to a different branch or work on a different task without having to commit my changes to the *current branch* -> *note*: the *stash entry* is *not* associated with any branch until I apply it to a branch using `git stash apply` or `git stash pop` command.
     - While similar, the differences between those 2 commands are: "*git stash apply*" leaves the *stash entry* in the *stash list* so I can *apply* it again later if needed, while "*git stash pop*" removes the *stash entry* from the *stash list* & I must be sure that I would no longer need to *apply stash entry*.
   - `git stash list` shows a list of all the stash entries in my repository, including their index numbers, the branch on which they were stashed, and a short description of the changes that were stashed.
-
-
   - `git stash drop` removes the *stash entry* from the *stash list* (Git repository).
   -  `git stash show` to inspect the changes in the stash entry before deciding whether to drop it.
 
