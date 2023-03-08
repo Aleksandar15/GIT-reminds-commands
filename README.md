@@ -54,6 +54,19 @@
   - It can be used even for fixing a *typo*; for ex.: if I have 2 branches "*main*" and "*dev"* branch, if there is a *typo* in the "*main*" branch that has already been fixed in the "*dev*" branch I can use *git cherry-pick* command to *apply* the *typo fix* commit from the "*dev*" branch into the "*main*" branch; altough this is a small change so it most likely will be just fixed in the current branch.
 - `git stash` will *save* my *changes* and *revert* my *working directory* to the *last commit* -> later, when I'd be ready to continue working on my feature, I can *apply* the *stash* using the `git stash apply` command. This will *restore* my *saved changes* into my *working directory*.
   - "Stashing" is the act of *temporarily saving changes* that I've made to my *working directory* without committing them.
+  - Git saves my changes in a *hidden stash entry*, which is stored in the Git repository. The *stash entry* itself is a *commit object* that contains the changes I've made to my *working directory*, but it is not stored in any branch or commit history. Instead, it is kept separate from the *current branch*, allowing me to *temporarily set aside changes* and I can switch to a different branch or work on a different task without having to commit my changes to the *current branch* -> *note*: the *stash entry* is *not* associated with any branch until I apply it to a branch using `git stash apply` or `git stash pop` command.
+    - While similar, the differences between those 2 commands are: "*git stash apply*" leaves the *stash entry* in the *stash list* so I can *apply* it again later if needed, while "*git stash pop*" removes the *stash entry* from the *stash list* & I must be sure that I would no longer need to *apply stash entry*.
+  - `git stash list` shows a list of all the stash entries in my repository, including their index numbers, the branch on which they were stashed, and a short description of the changes that were stashed.
+
+
+  - `git stash drop` removes the *stash entry* from the *stash list* (Git repository).
+  -  `git stash show` to inspect the changes in the stash entry before deciding whether to drop it.
+
+
+
+
+
+
 
 
 
