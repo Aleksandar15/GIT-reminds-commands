@@ -47,6 +47,8 @@
   - `-m` flag is used to rename the *current* branch.
   - `-d` flag deletes a branch *other* than the branch I'm currently at -> *note:* to delete the current branch, a workaround is to first switch to a different branch first.
   - `git branch new-feature` the branch named *new-feature* will be created and will point to the same commit as the current branch -> *note* this command *won't* switch to the new branch automatically.
+  - `-vv`to see the *upstream branch* of my current branch; also shows the UI of the (*last*) commit.
+    - For ex.: it will show up as *master  808b598 [origin/master] Initial commit*; and if there is no *upstream set* then it won't show the name between the square brackets.
 - `git switch` is used to *switch* or *check out* at a specific branch. Introduced in same version as *git restore* v2.23.
   - If I have *uncommitted changes* in my *working directory*, I won't be able to use *git switch* to switch branches; in that case I would need to *commit* my changes or to *stash* them before switching to a different branch.
   - *git switch* needs to be provided with the correct branch name as it won't create a new one if it doesn't exist.
