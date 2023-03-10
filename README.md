@@ -21,6 +21,7 @@
        - When I'd clone a repository from a remote repository, Git automatically sets up a "*remote*" called "*origin*" that *points* to the repository I cloned from. This allows me to *push* and *pull* changes to and from the *remote repository*. `git push origin main`: Git will *push* the changes *made* on the "*main" branch* to the '*remote' repository* named "*origin*".
    - *When* or *how often* do I push changes? I can choose between pushing on every *single commit*, but it's also common to stack up a few *changes* (*commits*) and on the last (bigger) *commit* to do the *pushing*.
    - *NOTE*: the most confusing part about GitHub & Bitcuket can be the fact that "*pull request*" term stands for "*merge request*" as is called in cloud like GitLab; essentially both terms mean the same thing: *a request to merge changes from one branch into another*.
+   - A great blog about <a href="https://www.atlassian.com/git/tutorials/syncing/git-pull">git push</a>.
 - `git pull` is used to update my local repository with changes from a remote repository (/cloud/distributed repository like GitHub or GitLab). 
   - *git pull* command is a combination of 2 other commands: *git fetch* followed by *git merge*.
     - In the first stage of operation *git pul*l will execute a *git fetch* scoped to the *local branch* that *HEAD is pointed at* -> once the content is downloaded, *git pull* will do *git merge* where a new merge commit will be-created and *HEAD* updated to *point at the new commit
@@ -43,6 +44,11 @@
      - *Merge conflicts* typically occur in the *local repository* ('*committed area'*) when attempting to *merge changes* from a *remote repository*; the *local directory* and *staging area* are *not* directly involved in *merge conflicts*, but they can contribute to conflicts by containing changes that conflict with changes in the other branch. 
      - In general, it's a best practice to regularly *commit change*s to the *local repository* and *pull changes* from the remote repository to *minimize* the chances of *merge conflicts*.
        - *IMPORTANT*: The logic behind when I *commit changes locally* regularly is that I'm saving a *snapshot* of my work that I can refer back to if something goes wrong && when I *pull changes* from the *remote repository*, I'm *bringing* in any *changes* that have been made since my last pull -> if there are any *conflicts* in my *local changes* I'd be notified & have the opportunity to fix (*resolve*) those breaking changes (*conflicts*) *EARLY ON* and then continue my work from there.
+     - *git pull* flags:
+       - Default (no flags) `git pull <remote>` is as same as `git fetch ＜remote＞` followed by `git merge origin/＜current-branch＞`.
+       - `--no-commit <remote>` flag *fetches* the remote content but does *not* create a new merge commit.
+       - `--rebase <remote>` instead of using *git merge* to *integrate* ('*merge*') the *remote branch* with the *local branch* (as by default *git pull*), uses *git rebase* instead.
+       - `--verbose` shows the *content* being downloaded and the *merge details*.
 - `git merge` merges ('*integrates'*) the specified branch into my current branch. It can lead to *merge conflicts* that would need to be solved manually; here is a YouTube video by freeCodeCamp that shows <a href="https://youtu.be/RGOj5yH7evk?t=2950">how to solve merging conflict</a> at 49:00 into the video.
 - - `git diff` is used to *show differences* between two versions of a file, or between two branches or commits in a Git repository; it means I can use *commit hash* or *HEAD*s
     - `--staged` flag shows the differences between the *staging area* and the most recent commit (even if they were *modified* or *added* or *deleted*).
@@ -119,6 +125,16 @@
   - If *file.js* was removed from *working directory* then I'm required to run *git add* to stage those changes & they will show up in *git status* as *changes to be commited* (or *green 'D'* if used with *-s* flag).
 - `ls` lists files. Without flags it lists all files in the current directory except for hidden files.
   - `-a` flag shows hidden files (usually files starting with a dot (.))
+- `git remote` command is used to specify what remote endpoints the syncing commands will operate on. *git remote* is used to *view, add, or remove* remotes associated with the *local repository*.
+  - When I clone a repository from a remote server, Git automatically creates a remote called "*origin*", which *points* to the *original (remote) repository*
+  - For ex.: to *add* a new *remote repository* named "upstream" with the URL https://github.com/upstream/repo.git, I can use the following command:`git remote add upstream https://github.com/upstream/repo.git` -> then, I can *fetch* the latest changes from the "*upstream*" *repository* using the following command: `git fetch upstream` this will *download* the *changes* from the "*upstream*" *repository* into my *local repository*.
+  - Other common uses of the *git remote* command:
+    - `git remote`: List all the remote repositories associated with the local repository.
+    - `git remote -v`: List all the remote repositories associated with the local repository along with their URLs.
+    - `git remote add <name> <url>`: Add a new remote repository to the local repository with the specified name and URL.
+    - `git remote remove <name>`: Remove a remote repository from the local repository with the specified name.
+    - `git remote rename <old-name> <new-name>`: Rename a remote repository from the old name to the new name.
+
 ---
 *Below are the Git commands that I haven't yet needed to apply them in my projects*:
 - `git cherry-pick` git cherry-pick command followed by the *commit hash* of the commit I want to apply it to; useful when I'd want to apply a bug fix (*hotfix* is the term) or a new feature from one branch to another *without* merging the entire branch.
