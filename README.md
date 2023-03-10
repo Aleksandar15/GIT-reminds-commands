@@ -1,4 +1,4 @@
-# GiT-reminds-commands
+# GIT-reminds-commands
 #### Note
 ##### I use my own knowledge and experience to describe the commands I use as my reminder.
 
@@ -20,7 +20,37 @@
      - In Git `origin` is a commonly used name for the default remote repository.
        - A *remote repository* is a repository that is hosted on a different machine or server, such as on GitHub or GitLab.
        - When I'd clone a repository from a remote repository, Git automatically sets up a "*remote*" called "*origin*" that *points* to the repository I cloned from. This allows me to *push* and *pull* changes to and from the *remote repository*. `git push origin main`: Git will *push* the changes *made* on the "*main" branch* to the '*remote' repository* named "*origin*".
-- `git clean` must be used with the `-f` flag to remove *untracked files* from *working directory*; used for removing recently created files that exist *only* in the *working directory* so a simple *git restore file.js* will *not* work because Git doesn't know where to restore it from. 
+   - *When* or *how often* do I push changes? I can choose between pushing on every *single commit*, but it's also common to stack up a few *changes* (*commits*) and on the last (bigger) *commit* to do the *pushing*.
+   - *NOTE*: the most confusing part about GitHub & Bitcuket can be the fact that "*pull request*" term stands for "*merge request*" as is called in cloud like GitLab; essentially both terms mean the same thing: *a request to merge changes from one branch into another*.
+- `git pull` is used to update my local repository with changes from a remote repository (/cloud/distributed repository like GitHub or GitLab). 
+  - *git pull* command is a combination of 2 other commands: *git fetch* followed by *git merge*.
+    - In the first stage of operation *git pul*l will execute a *git fetch* scoped to the *local branch* that *HEAD is pointed at* -> once the content is downloaded, *git pull* will do *git merge* where a new merge commit will be-created and *HEAD* updated to *point at the new commit
+  - When doing *git pull* a *merge conflict* can occur -> Git will *pause* the *merge process* and notify me of the conflict; I can use the *git status* command to see which *files* have conflicts; it will show me "*unmerged paths*" which means these are *files* with *conflicts* that need to be *resolved* in a way that makes sense for the project.
+    - Since *git merge* is the second part of the process; with *git pull* Git will create a new commit that includes both my *local changes (working directory)* & the changes I've *pulled* from the *remote repository*. 
+      - To clarify any possible confusion: it does *not* overwrite anything from my *local repository* as it only adds a *new commit*; but in a case of *merging conflict* it pauses the *merging process* because it would potentially *overwrite changes* in both my *working directory* and *staging area* -> that's why a best practice is to *stage* my *local changes* & *commit* them before running *git pull*.
+        - Once *conflicts* are *resolved* those changes I have made *locally (in working directory)* that have *not* yet been *committed*, I will need to *stage* those *changes* (*git add*) & *commit* (*git commit -m "resolved conflicts with file.js"*) them first to creata a *new commit* that includes these *resolved changes* -> since I don't need to re-run *git pull* as the *merging process* was waiting for me to *resolve* the *conflicts* -> once the *merge process* has completed by *staging* & *committing* the fix I can then run *git push* or keep working from there.
+  - *git pull* `--rebase` flag will attempt to *reapply* my *local changes* on *top* of the *remote changes*, rather than creating a *merge commit*. This can potentially *overwrite changes* in my *working directory* and *staging area* if there are *conflicts* between my *local changes* and the *remote changes*.
+    - A *git status* of the merge conflict would look like:
+```
+<<<<<<< HEAD
+// my conflicting local changes (typically in local repository)
+=======
+// conflicting changes from the remote branch
+>>>>>>> origin/main
+```
+   - Once the conflicts are *resolved* I can *stage* the changes (*git add conflicting-file.js*) & commit the merge (*git commit*).
+     - For the ease of fixing *merge conflicts*, I can use a *visual merge tool* like `git mergetool` to help out; this will launch a tool like `vimdiff` or `meld` that will show the *conflicting changes* side-by-side and allow me to choose which changes to keep or I can modify the code directly.
+     - *Merge conflicts* typically occur in the *local repository* ('*committed area'*) when attempting to *merge changes* from a *remote repository*; the *local directory* and *staging area* are *not* directly involved in *merge conflicts*, but they can contribute to conflicts by containing changes that conflict with changes in the other branch. 
+     - In general, it's a best practice to regularly *commit change*s to the *local repository* and *pull changes* from the remote repository to *minimize* the chances of *merge conflicts*.
+       - *IMPORTANT*: The logic behind when I *commit changes locally* regularly is that I'm saving a *snapshot* of my work that I can refer back to if something goes wrong && when I *pull changes* from the *remote repository*, I'm *bringing* in any *changes* that have been made since my last pull -> if there are any *conflicts* in my *local changes* I'd be notified & have the opportunity to fix (*resolve*) those breaking changes (*conflicts*) *EARLY ON* and then continue my work from there.
+- `git merge` merges the specified branch into the current branch. It can lead to merge conflicts that would need to be solved manually; here is a YouTube video by freeCodeCamp that shows <a href="https://youtu.be/RGOj5yH7evk?t=2950">how to solve merging conflict</a> at 49:00 into the video.
+- - `git diff` is used to *show differences* between two versions of a file, or between two branches or commits in a Git repository; it means I can use *commit hash* or *HEAD*s
+    - `--staged` flag shows the differences between the *staging area* and the most recent commit (even if they were *modified* or *added* or *deleted*).
+  - If the *merge* is *successful*, the *changes* will be added to my *commit history* as a *new commit*.
+    - To clarify any possible confusion: it does *not* overwrite anything from my *local repository* as it only adds a *new commit*.
+      - That's why if I have made *changes locally* that have *not* yet been *committed*, I must *commit* them first *before* running *git merge*.
+- `git clone`is used to create a copy of an existing Git repository; Git creates a new repository with all the *history* and *branches*, including all the files, directories (folders), and commits of the *original* repository.
+- `git clean` must be used with the `-f` flag to remove *untracked files* from *working directory*; used for removing recently created files that exist *only* in the *working directory*. '*Untraacked file'* is a file that isn't '*tracked*' (*staged*) so it doesn't exist in the *staging area*; a simple *git restore file.js* will *not* work because Git doesn't know where to restore it from. 
   - It's an irreversible command, so a *git checkout file.js* to restore the file from the most recent commit *perhaps* will *not* work as it is a recently created file.
 - `git rm` to remove file from *staging area* must be used with either `--cached` to keep the file in *working directory*, or `-f` to force removal from both *working directory* & *staging area*
   - If I have committed the changes and this *-f* removal was done by mistake: I have the option to *git revert* to *uncommit*/undoing a commit; or *git restore --source=HEAD file.js* to restore the removed file from the last commit.
@@ -48,7 +78,6 @@
       - A red *M* letter means a file is modified but is only in the *working directory* & not *staging area*.
       - Double question marks *??* means file is recently created & is *untracked* in the *staging area*
     - The third column indicates the name of the file.
-
 - `git branch` to create, list, rename, and delete branches. The default command without flags will show a list of all branches in the repository; the branch prefixed with an asterisk sign (\*) is the current branch I am in.
   - `-a` flag would show the *remote* branches as well.
   - `-m` flag is used to rename the *current* branch.
@@ -61,11 +90,8 @@
   - *git switch* needs to be provided with the correct branch name as it won't create a new one if it doesn't exist.
   - If there are conflicts between my current branch and the branch I'm trying to switch onto, an error will be thrown and I'd have to resolve that first.
   - *Only* works with branches and can't use it for switching commits like *git checkout* but a better alternative is the *git restore --source* flag.
- - `git checkout` *switches* to the specified branch and *updates* the *working directory* to *match* the *contents* of *that* branch. It is an older command in Git that can be used to *switch* between branches or to *check out* specific commits; its functionality is split into *git restore* && *git switch*.
+ - `git checkout` *switches* to the specified branch and *updates* the *working directory* to *match* the *contents* of *that* branch. It is an older command in Git that can be used to *switch* between branches or to *check out* specific commits; in Git version 2.23 its functionality is split into 2 commands *git restore* && *git switch*.
    - `-b` flag creates a new branch with the specified name, pointing to the current commit, and switches to the new branch; while capital "b" a `-B` flag would overwrite a branch even if it exists and already has contents in it; to create a branch without switching to it automatically use *git branch new-feature*
-- `git merge` merges the specified branch into the current branch. It can lead to merge conflicts that would need to be solved manually; here is a YouTube video by freeCodeCamp that shows <a href="https://youtu.be/RGOj5yH7evk?t=2950">how to solve merging conflict</a> at 49:00 into the video.
-- - `git diff` is used to *show differences* between two versions of a file, or between two branches or commits in a Git repository; it means I can use *commit hash* or *HEAD*s
-  - `--staged` flag shows the differences between the *staging area* and the most recent commit (even if they were *modified* or *added* or *deleted*).
 - `git ls-trees` lists all the *files* in a *tree* from a commit (either by *HEAD* or its *UI* AKA Unique identifier AKA hash which is generated by Git)
   - The second column in the list refers to the *type* of the *object* and it can be '*blob*' or '*tree*':
     - *blob* represents a file
