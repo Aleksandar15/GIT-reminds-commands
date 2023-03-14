@@ -112,6 +112,7 @@
   - If I have *uncommitted changes* in my *working directory*, I won't be able to use *git switch* to switch branches; in that case I would need to *commit* my changes or to *stash* them before switching to a different branch.
   - *git switch* needs to be provided with the correct branch name as it won't create a new one if it doesn't exist.
   - If there are conflicts between my current branch and the branch I'm trying to switch onto, an error will be thrown and I'd have to resolve that first.
+    - Switch error example when there are working directory (local) changes that were not yet commited: "*Your local changes to the following files would be overwritten by checkout: *; ... ;* Please commit your changes or stash them before you switch branches.*".
   - *Only* works with branches and can't use it for switching commits like *git checkout* but a better alternative is the *git restore --source* flag.
     - `-c` flag will create a new branch with the provided name and immediately switch to it.
  - `git checkout` *switches* to the specified branch and *updates* the *working directory* to *match* the *contents* of *that* branch. It is an older command in Git that can be used to *switch* between branches or to *check out* specific commits; in Git version 2.23 its functionality is split into 2 commands *git restore* && *git switch*.
