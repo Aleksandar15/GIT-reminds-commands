@@ -137,6 +137,8 @@
     - `git remote add <name> <url>`: Add a new remote repository to the local repository with the specified name and URL.
     - `git remote remove <name>`: Remove a remote repository from the local repository with the specified name.
     - `git remote rename <old-name> <new-name>`: Rename a remote repository from the old name to the new name.
+- `git remote add origin` *url-example.git* is a Git command used to add a remote repository to my local Git repository.
+  - The term "*origin"* in this command is the name of the *remote repository* that I'm adding; "origin" is a common naming convenience but can be anything else. The only rules are no special characters.
 
 ---
 *Below are the Git commands that I haven't yet needed to apply them in my projects*:
