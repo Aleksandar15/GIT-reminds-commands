@@ -157,9 +157,44 @@
 
 
 
-
-
-
+---
+#### Extra experiences:
+- Potential issues with Forks when I tried to Sync *main* branch with the original repo's *main* branch, in a case where I didn't use the "*magical*" **Sync** button (the magic is revealed <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-command-line">here</a>), *which was previously called <a href="https://i.stack.imgur.com/NKEzt.png">Fetch and merge</a> button*, is that when I actually merged those *X commit(s) behind* from the GitHub website at my fork https://github.com/Aleksandar15/<fork-name\> -> my *main* branch became *X commit(s) ahead* - which was the most confusing part because all the files match as the <original-repo\>, so **0 files changes**, but turns out, *under the hood* what happens is that *merge* cam eform the <original-repo\> so my <fork-repo\> got one extra merge and changed its *HEAD* to be 1 HEAD(s) above the *upstream/main*.
+  - To fix this issue, and return this *X commit(s) ahead* back to *Synced*, there's a great answer I found <a href="https://github.com/orgs/community/discussions/22440#discussioncomment-3236721">here</a>:
+  ```
+  git checkout main
+  git fetch upstream
+  git reset --hard upstream/main
+  git push --force
+    ```
+    - Which essentially switches HEAD: *HEAD is now at #hash-here Commit message here (#PR-number)*
+      - And now running `git status` shows:
+        ```
+        On branch main
+        Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.   
+        (use "git pull" to update your local branch)
+        nothing to commit, working tree clean
+         ```
+          - *NOTE*: **don't** run `git pull` because that's not the *goal* here.
+       - Whereas running the normal `git push` **without** a `--force` flag returns an error:
+         ```
+         To https://github.com/Aleksandar15/react.dev.git
+         ! [rejected]          main -> main (non-fast-forward)
+         error: failed to push some refs to 'https://github.com/Aleksandar15/react.dev.git'
+         hint: Updates were rejected because the tip of your current branch is behind
+         hint: its remote counterpart. Integrate the remote changes (e.g.
+         hint: 'git pull ...') before pushing again.
+         hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+         ```
+         - So, running the apropriate command (*for this case scenario*) `git push --force` returns a success along the lines of:
+           ```
+           Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+           To https://github.com/Aleksandar15/react.dev.git
+            + d412a7fb...cdc99178 main -> main (forced update)
+           ```
+             - *Note*: The shorthand flag `-f` works as well.
+              - And my Fork at GitHub website says: "*This branch is up to date with reactjs/react.dev:main.*".
+            
 
 
 
