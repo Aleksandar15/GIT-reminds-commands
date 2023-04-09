@@ -160,6 +160,11 @@
 ---
 #### Extra experiences:
 - Potential issues with Forks when I tried to Sync *main* branch with the original repo's *main* branch, in a case where I didn't use the "*magical*" **Sync** button (the magic is revealed <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-command-line">here</a>), *which was previously called <a href="https://i.stack.imgur.com/NKEzt.png">Fetch and merge</a> button*, is that when I actually merged those *X commit(s) behind* from the GitHub website at my fork https://github.com/Aleksandar15/<fork-name\> -> my *main* branch became *X commit(s) ahead* - which was the most confusing part because all the files match as the <original-repo\>, so **0 files changes**, but turns out, *under the hood* what happens is that *merge* cam eform the <original-repo\> so my <fork-repo\> got one extra merge and changed its *HEAD* to be 1 HEAD(s) above the *upstream/main*.
+  - *NOTE*: For the below solution to work I have to set a *upstream* (or any name) "*remote*", which is mentioned in the link above at the "*magic is revealed*" <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-repository-for-a-fork">part</a>:
+    - `git remote -v` to view all of my current *remote*s; `-v` flag for the links.
+    - `git remote add upstream <link>` where <link\> is `https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git`.
+      - *Note*: the `.git` file extension at the end is not necessary, but it's a good convention to follow.
+    - `git remote remove <remote-name>` to remove a remote link.
   - To fix this issue, and return this *X commit(s) ahead* back to *Synced*, there's a great answer I found <a href="https://github.com/orgs/community/discussions/22440#discussioncomment-3236721">here</a>:
   ```
   git checkout main
