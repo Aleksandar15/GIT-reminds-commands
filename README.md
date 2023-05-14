@@ -3,8 +3,9 @@
 ##### I use my own knowledge and experience to describe the commands I use as my reminder.
 
 - `git reset` moves HEAD pointer to a different commit AKA undoing the commit that I want to remove. 
-    - *Default* flag: `--mixed` will undo the most recent commit and *unstage* the changes, *but leave* the changes in my *working directory*; use case: splitting a commit into multiple commits: if I made several changes in a single commit and I want to split them into multiple commits -> I can then *stage* the specific ones again using *git add*, and then *commit* them again. 
+    - ***Default*** flag: `--mixed` will undo the most recent commit and *unstage* the changes, *but leave* the changes in my *working directory*; use case: splitting a commit into multiple commits: if I made several changes in a single commit and I want to split them into multiple commits -> I can then *stage* the specific ones again using *git add*, and then *commit* them again. 
       -  Another example can be merging conflicts: if I am on a branch and need to merge changes from another branch, I can use *git reset --mixed* to *unstage* the *changes* and resolve the conflicts manually in my *working directory*.
+         - `--mixed` being the default flag I can use simply `git reset`; use case: to *unstage all files* from *staging area* but keeps the local changes untouched which, again, means: the changes will be removed from the staging area, but I will still have the modified files in my local workspace.
     - On the softer side `--soft` flag will will undo the most recent commit, but *leave* the changes in both *staging area* & *working directory*; use case ex.: when I want to change the commit *message* of a previous commit. 
       - *git reset --soft `HEAD~1`* or *`HEAD^`* can be both used to "*uncommit*" and just re-do *git commit -m* with a different message provided.
         - Note that both *HEAD*'s achieve the same results as *HEAD~1* refers to the commit one generation behind; while *HEAD^* refers the parent commit of the current commit (and *HEAD^^* to the grandparent, etc.).
