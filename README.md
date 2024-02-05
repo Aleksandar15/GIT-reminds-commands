@@ -172,6 +172,7 @@ talled types*".
     - `git remote rename <old-name> <new-name>`: Rename a remote repository from the old name to the new name.
 - `git remote add origin` *url-example.git* is a Git command used to add a remote repository to my local Git repository.
   - The term "*origin"* in this command is the name of the *remote repository* that I'm adding; "origin" is a common naming convenience but can be anything else. The only rules are no special characters.
+- `git rev-list --count origin/main..HEAD`: This command will return the number of commits that are in my local branch but not in the remote. If the count is greater than 0, my local branch is ahead of the remote branch. If the count is 0, my local branch is in sync.
 
 ---
 *Below are the Git commands that I haven't yet needed to apply them in my projects*:
