@@ -242,6 +242,13 @@ talled types*".
           - Which, funnily enough the **scenario** I was predicting/talking about (_or at least somewhat similar_) has happened to me and is written in _Experience # '3.'_ below.
             
 3. All of it was done for my Cars Club Frontend's repository (IDs of the PRs are: ever since [pull/50](https://github.com/Aleksandar15/Cars-Club-frontend/pull/50) - until [pull/59](https://github.com/Aleksandar15/Cars-Club-frontend/pull/59)).
+- **UPDATE3:** (*As written in the '2.' experience above towards the very ending*) Again, all of this could have been avoided if I had created a branch by following the instructions below instead of branching off of "_feature_18_" branch and gathering its **unwanted commits history** for the back-then-new "_hotfix_2_" branch!
+  - (As I had written in my own comment in /pull/56 at Cars-Club-frontend.)
+  - Create a branch
+    1. `git checkout main` from any folder in my local `project-folder-name` repository.
+    1. `git pull origin main` to ensure I have the **latest `main`** code.
+    1. `git checkout -b the-name-of-my-branch` (replacing `the-name-of-my-branch` with a suitable name) to create a branch.
+       - (*Source for these steps are the react.dev doc's at their GitHub README.*)
 - **UPDATE2:** Looking back at it, once I was inside my _then-new_ "**hotfix2**" branch I could have "uncommit" the last 2 commits by running the command `git reset --soft HEAD~2`: and only to `git add` then `git commit` the 3rd Hotfix commit that I will `git push origin hotfix2`; and then switch back to my "**feature_18**" and continue my feature-work (with those _2 commit **intact**_).
   - (*Update2 is above ORIGINAL for easy readability.*)
 
