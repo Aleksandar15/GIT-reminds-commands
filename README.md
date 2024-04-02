@@ -243,7 +243,7 @@ talled types*".
             
 3. All of it was done for my Cars Club Frontend's repository (IDs of the PRs are: ever since [pull/50](https://github.com/Aleksandar15/Cars-Club-frontend/pull/50) - until [pull/59](https://github.com/Aleksandar15/Cars-Club-frontend/pull/59)).
 - **UPDATE3:** (*As written in the '2.' experience above towards the very ending*) Again, all of this could have been avoided if I had created a branch by following the instructions below instead of branching off of "_feature_18_" branch and gathering its **unwanted commits history** for the back-then-new "_hotfix_2_" branch!
-  - (As I had written in my own comment in [/pull/56](https://github.com/Aleksandar15/Cars-Club-frontend/pull/56) at Cars-Club-frontend.)
+  - (As I had written in my own [comment](https://github.com/Aleksandar15/Cars-Club-frontend/pull/56#issuecomment-1998917385) in [/pull/56](https://github.com/Aleksandar15/Cars-Club-frontend/pull/56) at Cars-Club-frontend.)
   - Create a branch
     1. `git checkout main` from any folder in my local `project-folder-name` repository.
     1. `git pull origin main` to ensure I have the **latest `main`** code.
