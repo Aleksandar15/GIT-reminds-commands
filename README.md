@@ -129,6 +129,7 @@
   - *Only* works with branches and can't use it for switching commits like *git checkout* but a better alternative is the *git restore --source* flag.
     - `-c` flag will create a new branch with the provided name and immediately switch to it.
  - `git checkout` *switches* to the specified branch and *updates* the *working directory* to *match* the *contents* of *that* branch. It is an older command in Git that can be used to *switch* between branches or to *check out* specific commits; in Git version 2.23 its functionality is split into 2 commands *git restore* && *git switch*.
+   - **Flagless** use case: `checkout <commit_hash>` . when I want to temporarily or selectively revert changes in my working directory without affecting the staging area or branch history, often used for reviewing old code or experimenting with different versions.
    - `-b` flag creates a new branch with the specified name, pointing to the current commit, and switches to the new branch; while capital "b" a `-B` flag would overwrite a branch even if it exists and already has contents in it; to create a branch without switching to it automatically use *git branch new-feature*
      - *-b* flag is equal to running *git branch* followed by *git switch*.
      - New experience I also tried running `git checkout HEAD~31` (in continuation of the story above about "git reset HEAD~31" (CTRL+F/CTRL+G)) but that just gave me another features I've never encountered:
