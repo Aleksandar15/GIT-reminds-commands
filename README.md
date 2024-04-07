@@ -250,7 +250,7 @@ talled types*".
     1. `git checkout main` from any folder in my local `project-folder-name` repository.
     1. `git pull origin main` to ensure I have the **latest `main`** code.
     1. `git checkout -b the-name-of-my-branch` (replacing `the-name-of-my-branch` with a suitable name) to create a branch.
-       - (*Source for these steps are the react.dev doc's at their GitHub README.*)
+       - (*Source for these steps are the [react.dev doc's](https://github.com/reactjs/react.dev?tab=readme-ov-file#create-a-branch) at their GitHub README.*)
 - **UPDATE2:** Looking back at it, once I was inside my _then-new_ "**hotfix2**" branch I could have "uncommit" the last 2 commits by running the command `git reset --soft HEAD~2`: and only to `git add` then `git commit` the 3rd Hotfix commit that I will `git push origin hotfix2`; and then switch back to my "**feature_18**" and continue my feature-work (with those _2 commit **intact**_).
   - (*Update2 is above ORIGINAL for easy readability.*)
 
